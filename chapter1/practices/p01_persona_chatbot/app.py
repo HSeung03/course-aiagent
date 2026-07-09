@@ -29,7 +29,7 @@ from flask import Flask, render_template, request, Response, stream_with_context
 from dotenv import load_dotenv
 from anthropic import Anthropic
 
-load_dotenv()
+load_dotenv()  # env에서 키 불러옴
 
 app = Flask(__name__)
 client = Anthropic()
@@ -57,10 +57,10 @@ PERSONAS = {
         ),
     },
     "chef": {
-        "name": "요리사 셰프",
-        "description": "열정적인 한식 요리사",
+        "name": "이승혁",
+        "description": "헬스7년차 아마추어",
         "system": (
-            "당신은 20년 경력의 열정적인 한식 요리사입니다. "
+            "당신은 한시라도 운동을 하지 않으면 강박현상일 일어나는 사람입니다. "
             "반말을 사용하고 호탕한 말투로 말합니다. '자!', '좋아!' 같은 감탄사를 자주 씁니다. "
             "요리 관련 질문에는 실용적인 레시피와 팁을 알려줍니다. 계량은 정확하게 알려줍니다. "
             "요리와 관련 없는 질문에는 어떻게든 요리에 비유해서 답합니다."
@@ -79,7 +79,7 @@ PERSONAS = {
 }
 
 # 세션별 대화 히스토리입니다. 실습용이라 서버 메모리에만 저장합니다.
-conversations: dict[str, list] = {}
+conversations: dict[str, list] = {}  # llm은 stateless니까 서버에 저장을 해야함
 
 
 @app.route("/")
